@@ -5,14 +5,19 @@ import { jwtDecode } from 'jwt-decode';
 
 import useAdmin from '../../hooks/useAdmin';
 import useAuth from '../../hooks/useAuth';
+import useModal from '../../hooks/useModal';
 
 import EditUserModal from './EditUserModal';
+import CreateUserModal from './CreateUserModal';
+
+import Modal from '../common/Modal';
 
 
 const AllUsers = () => {
     const navigate = useNavigate();
     const { users, fetchUsers } = useAdmin();
     const { user } = useAuth();
+    const { openModal } = useModal();
 
 
     useEffect(() => {
@@ -38,9 +43,21 @@ const AllUsers = () => {
     }
 
 
+
+    const handleOpenModal = () => {
+        openModal(
+            <CreateUserModal />
+        )
+    }
+
+
+    
     return (
         <div className="container mt-4">
             <h3 className="my-5">All Users</h3>
+            <div className="container d-flex justify-content-end mb-5">
+                <button className="btn btn-primary" onClick={handleOpenModal}>Create New User</button>
+            </div>
             <table className="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -78,6 +95,7 @@ const AllUsers = () => {
                     <EditUserModal userData={user} />
                 </div>
             ))}
+            <Modal />
         </div>
     )
 }

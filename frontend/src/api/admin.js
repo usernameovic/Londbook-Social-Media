@@ -55,7 +55,7 @@ const createUser = async (username, email, password) => {
             throw new Error(data.message);
         }
         const data = await response.json();
-        return data.message;
+        return data;
     } catch (error) {
         throw error;
     }

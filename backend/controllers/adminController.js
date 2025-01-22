@@ -51,7 +51,7 @@ const AdminController = {
             const newUser = new User(newUserData);
 
             await newUser.save();
-            return res.status(201).json({ message: 'New user has been successfully created!' });
+            return res.status(201).json({ user: newUser, message: 'New user has been successfully created!' });
 
         } catch (error) {
             console.log(error);

@@ -43,9 +43,17 @@ const AdminProvider = ({ children }) => {
     const addUser = async (username, email, password) => {
         try {
             const data = await createUser(username, email, password);
-            setUsers(prev => [...prev, data]);
+            const { user, message } = data;
+            setUsers(prev => [...prev, user]);
+            setAlertMessage(message);
+            setTimeout(() => {
+                setAlertMessage(null);
+            }, 3000);
         } catch (err) {
-            throw err;
+            setAlertMessage(err.message);
+            setTimeout(() => {
+                setAlertMessage(null);
+            }, 3000);
         }
     }
 
